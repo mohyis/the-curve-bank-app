@@ -31,7 +31,7 @@ const swaggerDefinition = {
     },
     servers: [
         {
-            url: 'https://pickerapp.onrender.com',
+            url: 'the-curve-bank-app.vercel.app',
             description: 'development server',
         },
     ],
