@@ -189,7 +189,7 @@ exports.login = async(req,res, next)=>{
 
 exports.getAllUser = async(req,res, next)=>{
     try {
-        const allUsers = await userModel.find().select('-password').populate("wallet")
+        const allUsers = await userModel.find().select('-password')
 
         res.status(200).json({
             message: 'users found',
