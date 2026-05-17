@@ -227,6 +227,52 @@ router.post('/wallet', rate, verifyLogin, createWallet)
 router.get('/getwallet', verifyLogin, getWallet)
 router.get('/wallets', getWallets)
 
+/**
+ * @swagger
+ * /api/v1/user/transfer:
+ *   post:
+ *     summary: Funds transfer
+ *     description: send funds to other users
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               fromAccount:
+ *                 type: string
+ *                 description: a user's wallet account
+ *                 example: savings
+ *               recipientFullName:
+ *                 type: string
+ *                 description: The receivers Name
+ *                 example: Real Mei
+ *               recipientAccountNumber:
+ *                 type: number
+ *                 description: The receivers account number
+ *                 example: 6789876543
+ *               amount:
+ *                 type: number
+ *                 description: The User account number
+ *                 example: 80295
+ *               memo:
+ *                 type: string
+ *                 description: The User account balance
+ *                 example: for dinner
+ *     responses:
+ *       201:
+ *         description: transfer successful
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   description: a success message
+ *                   example: user reg successfully
+ */
 router.post('/transfer', rateTransfer , verifyLogin, transferFunds)
 
 router.get('/total', verifyLogin, availableBalance)
