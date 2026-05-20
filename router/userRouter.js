@@ -154,6 +154,68 @@ router.post('/register', signUp)
  *                   example: user login successfully
  */
 router.post('/login', rate ,login)
+
+
+
+/**
+ * @swagger
+ * /api/v1/user/getuser:
+ *   get:
+ *     tags:
+ *       - User
+ *     summary: All User
+ *     description: Get user
+ *     responses:
+ *       200:
+ *         description: retrieve a user
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 data:
+ *                   type: object
+ *                   properties:
+ *                     id:
+ *                       type: string
+ *                       description: The User Id
+ *                       example: 787674563782983746578439
+ *                     fullName:
+ *                       type: string
+ *                       description: The User full name
+ *                       example: john
+ *                     email:
+ *                       type: string
+ *                       description: The User email
+ *                       example: example@example.com
+ *                     accountType:
+ *                       type: string
+ *                       description: The User's account preference
+ *                       example: doe
+ *                     accountNumber:
+ *                       type: string
+ *                       description: The User account number
+ *                       example: 8029837465
+ *                     balance:
+ *                       type: string
+ *                       description: The User account number
+ *                       example: 8029837465
+ *                     isVerified:
+ *                       type: boolean
+ *                       description: The User verification status
+ *                       example: true
+ *                     createdAt:
+ *                       type: string
+ *                       format: date-time
+ *                       description: The User creation date
+ *                       example: 2026-05-04
+ *                     updatedAt:
+ *                       type: string
+ *                       format: date-time
+ *                       description: The User update time
+ *                       example: 2026-05-04
+ * 
+ */
 router.get('/getuser', rate, verifyLogin, getUser)
 
 /**
