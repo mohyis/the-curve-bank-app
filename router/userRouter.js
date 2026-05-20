@@ -13,6 +13,14 @@ const {rate, rateTransfer } = require('../middleware/rateLimit');
  *   description: user management and authentication
  */
 
+
+/**
+ * @swagger
+ * tags:
+ *   name: Wallet
+ *   description: wallet management and authentication
+ */
+
 /**
  * @swagger
  * components:
@@ -52,6 +60,45 @@ const {rate, rateTransfer } = require('../middleware/rateLimit');
  *           type: boolean
  *           description: The User verification status
  *           example: true
+ *         createdAt:
+ *           type: string
+ *           format: date-time
+ *           description: The User creation date
+ *           example: 2026-05-04
+ *         updatedAt:
+ *           type: string
+ *           format: date-time
+ *           description: The User update time
+ *           example: 2026-05-04
+ */
+
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     Wallet:
+ *       type: object
+ *       properties:
+ *         id:
+ *           type: string
+ *           description: The Wallet Id
+ *           example: 787674563782983746578439
+ *         userId:
+ *           type: string
+ *           description: The User's Id
+ *           example: 787674563782983746578439
+ *         accountType:
+ *           type: string
+ *           description: users account choice
+ *           example: savings
+ *         accountNumber:
+ *           type: number
+ *           description: The User acount number
+ *           example: 8029837465
+ *         accountBalance:
+ *           type: number
+ *           description: account balance
+ *           example: 837465
  *         createdAt:
  *           type: string
  *           format: date-time
@@ -285,16 +332,182 @@ router.delete('/deleteUser/:id', deleteUser)
 router.post('/resend', rate, resendOTP)
 router.post('/verify', verifyEmail)
 
+
+
+/**
+ * @swagger
+ * /api/v1/user/wallet:
+ *   post:
+ *     tags:
+ *       - Wallet
+ *     summary: User Wallet
+ *     description: Create a new wallet for the user
+ *    responses:
+ *      200:
+ *        description: create a new user wallet
+ *        requestBody:
+ *          required: true
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: object
+ *                properties:
+ *                data:
+ *                  type: object
+ *                  properties:
+ *                    userId:
+ *                      type: string
+ *                      description: The User's Id
+ *                      example: 787674563782983746578439
+ *                    accountType:
+ *                      type: string
+ *                      description: The User's account preference
+ *                      example: savings
+ *                    accountNumber:
+ *                      type: number
+ *                      description: The User account number
+ *                      example: 1234567890
+ *                    accountBalance:
+ *                      type: number
+ *                      description: The User account balance
+ *                      example: 1000.00
+ *                    createdAt:
+ *                      type: string
+ *                      format: date-time
+ *                      description: The Wallet creation date
+ *                      example: 2026-05-04
+ *                    updatedAt:
+ *                      type: string
+ *                      format: date-time
+ *                      description: The Wallet update time
+ *                      example: 2026-05-04
+ *    responses:
+ *      201:
+ *        description: wallet created successfully
+ *        content:
+ *          application/json:
+ *            schema:
+ *              type: object
+ *              properties:
+ *                message:
+ *                  type: string
+ *                  description: a success message
+ *                  example: wallet created successfully
+ */
 router.post('/wallet', rate, verifyLogin, createWallet)
+
+/**
+ * @swagger
+ * /api/v1/user/wallets:
+ *   get:
+ *     tags:
+ *       - Wallet
+ *     summary: User Wallet
+ *     description: Get one wallet owned by the user
+ *    responses:
+ *      200:
+ *        description: retrieve a user wallet
+ *        content:
+ *          application/json:
+ *            schema:
+ *              type: object
+ *              properties:
+ *                data:
+ *                  type: object
+ *                  properties:
+ *                    userId:
+ *                      type: string
+ *                      description: The User's Id
+ *                      example: 787674563782983746578439
+ *                    accountType:
+ *                      type: string
+ *                      description: The User's account preference
+ *                      example: savings
+ *                    accountNumber:
+ *                      type: number
+ *                      description: The User account number
+ *                      example: 1234567890
+ *                    accountBalance:
+ *                      type: number
+ *                      description: The User account balance
+ *                      example: 1000.00
+ *                    createdAt:
+ *                      type: string
+ *                      format: date-time
+ *                      description: The Wallet creation date
+ *                      example: 2026-05-04
+ *                    updatedAt:
+ *                      type: string
+ *                      format: date-time
+ *                      description: The Wallet update time
+ *                      example: 2026-05-04
+ */
 router.get('/getwallet', verifyLogin, getWallet)
+
+/**
+ * @swagger
+ * /api/v1/user/wallets:
+ *   get:
+ *     tags:
+ *       - Wallet
+ *     summary: User Wallets
+ *     description: Get all wallets associated with the user
+ *    responses:
+ *      200:
+ *        description: list of user wallets
+ *        content:
+ *          application/json:
+ *            schema:
+ *              type: object
+ *              properties:
+ *                data:
+ *                  type: array
+ *                  items:
+ *                    type: object
+ *                    properties:
+ *                      userId:
+ *                        type: string
+ *                        description: The User's Id
+ *                        example: 787674563782983746578439
+ *                      accountType:
+ *                        type: string
+ *                        description: The User's account preference
+ *                        example: savings
+ *                      accountNumber:
+ *                        type: number
+ *                        description: The User account number
+ *                        example: 1234567890
+ *                      accountBalance:
+ *                        type: number
+ *                        description: The User account balance
+ *                        example: 1000.00
+ *                      createdAt:
+ *                        type: string
+ *                        format: date-time
+ *                        description: The Wallet creation date
+ *                        example: 2026-05-04
+ *                      updatedAt:
+ *                        type: string
+ *                        format: date-time
+ *                        description: The Wallet update time
+ *                        example: 2026-05-04
+ */
 router.get('/wallets', getWallets)
 
 /**
  * @swagger
- * /api/v1/user/transfer:
+ * /api/v1/user/transfer/{id}:
  *   post:
  *     summary: Funds transfer
- *     description: send funds to other users
+ *     description: send funds to other users by wallet id
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: The wallet's Id
+ *         schema:
+ *           type: string
+ *           example: 875674563782983746578439
  *     requestBody:
  *       required: true
  *       content:
@@ -302,10 +515,6 @@ router.get('/wallets', getWallets)
  *           schema:
  *             type: object
  *             properties:
- *               fromAccount:
- *                 type: string
- *                 description: a user's wallet account
- *                 example: savings
  *               recipientFullName:
  *                 type: string
  *                 description: The receivers Name
@@ -316,11 +525,11 @@ router.get('/wallets', getWallets)
  *                 example: 6789876543
  *               amount:
  *                 type: number
- *                 description: The User account number
+ *                 description: The amount to transfer
  *                 example: 80295
  *               memo:
  *                 type: string
- *                 description: The User account balance
+ *                 description: A message for the transfer
  *                 example: for dinner
  *     responses:
  *       201:
@@ -335,7 +544,7 @@ router.get('/wallets', getWallets)
  *                   description: a success message
  *                   example: user reg successfully
  */
-router.post('/transfer', rateTransfer , verifyLogin, transferFunds)
+router.post('/transfer/:id', rateTransfer , verifyLogin, transferFunds)
 
 router.get('/total', verifyLogin, availableBalance)
 

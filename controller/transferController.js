@@ -6,10 +6,13 @@ const historyModel = require('../models/history')
 exports.transferFunds = async(req, res, next)=>{
     try {
         const {id} = req.user
-        const { fromAccount, recipientAccountNumber, amount, memo } = req.body
+        const walletId = req.params.id
+        const { recipientAccountNumber, amount, memo } = req.body
+
+        // const getAllAccount = await walletModel.find()
+        const sender = await walletModel.findOne({_id: walletId})
         const getRecipient = await walletModel.findOne({accountNumber: recipientAccountNumber})
-        const sender = await walletModel.findOne({userId: id, accountType: fromAccount})
-    
+
         if (!getRecipient){
             return res.status(404).json({
                 message: 'invalid account number'
@@ -28,9 +31,9 @@ exports.transferFunds = async(req, res, next)=>{
 
         const transfer = await transferModel.create({
             userId: id,
-            walletId: sender._id,
-            fromAccount,
-            recipientFullName: getRecipient.fullName,
+            walletId,
+            fromAccount: sender.accountType,
+            recipientFullName: getRecipient.accountName,
             recipientAccountNumber,
             amount,
             memo

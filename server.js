@@ -4,10 +4,12 @@ const PORT = 8645
 const userRouter = require('./router/userRouter')
 const swaggerUi = require('swagger-ui-express');
 const swaggerJsdoc = require('swagger-jsdoc')
-
-
+const cors = require('cors');
 const app = express();
 app.use(express.json())
+
+const allowedOrigins = ['http://localhost:3000', 'https://the-curve-bank-app.onrender.com'];
+app.use(cors({origin: allowedOrigins}));
 
 
 app.use("/api/v1/user", userRouter)
