@@ -341,58 +341,55 @@ router.post('/verify', verifyEmail)
  *     tags:
  *       - Wallet
  *     summary: User Wallet
- *     description: Create a new wallet for the user
- *    responses:
- *      200:
- *        description: create a new user wallet
- *        requestBody:
- *          required: true
- *          content:
- *            application/json:
- *              schema:
- *                type: object
- *                properties:
- *                data:
- *                  type: object
- *                  properties:
- *                    userId:
- *                      type: string
- *                      description: The User's Id
- *                      example: 787674563782983746578439
- *                    accountType:
- *                      type: string
- *                      description: The User's account preference
- *                      example: savings
- *                    accountNumber:
- *                      type: number
- *                      description: The User account number
- *                      example: 1234567890
- *                    accountBalance:
- *                      type: number
- *                      description: The User account balance
- *                      example: 1000.00
- *                    createdAt:
- *                      type: string
- *                      format: date-time
- *                      description: The Wallet creation date
- *                      example: 2026-05-04
- *                    updatedAt:
- *                      type: string
- *                      format: date-time
- *                      description: The Wallet update time
- *                      example: 2026-05-04
- *    responses:
- *      201:
- *        description: wallet created successfully
- *        content:
- *          application/json:
- *            schema:
- *              type: object
- *              properties:
- *                message:
- *                  type: string
- *                  description: a success message
- *                  example: wallet created successfully
+ *     description: wallet created successfully
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               data:
+ *                 type: object
+ *                 properties:
+ *                   userId:
+ *                     type: string
+ *                     description: The User's Id
+ *                     example: 787674563782983746578439
+ *                   accountType:
+ *                     type: string
+ *                     description: The User's account preference
+ *                     example: savings
+ *                   accountNumber:
+ *                     type: number
+ *                     description: The User account number
+ *                     example: 1234567890
+ *                   accountBalance:
+ *                     type: number
+ *                     description: The User account balance
+ *                     example: 1000.00
+ *                   createdAt:
+ *                     type: string
+ *                     format: date-time
+ *                     description: The Wallet creation date
+ *                     example: 2026-05-04
+ *                   updatedAt:
+ *                     type: string
+ *                     format: date-time
+ *                     description: The Wallet update time
+ *                     example: 2026-05-04
+ *     responses:
+ *       201:
+ *         description: wallet created successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   description: a success message
+ *                   example: wallet created successfully
  */
 router.post('/wallet', rate, verifyLogin, createWallet)
 
@@ -404,43 +401,43 @@ router.post('/wallet', rate, verifyLogin, createWallet)
  *       - Wallet
  *     summary: User Wallet
  *     description: Get one wallet owned by the user
- *    responses:
- *      200:
- *        description: retrieve a user wallet
- *        content:
- *          application/json:
- *            schema:
- *              type: object
- *              properties:
- *                data:
- *                  type: object
- *                  properties:
- *                    userId:
- *                      type: string
- *                      description: The User's Id
- *                      example: 787674563782983746578439
- *                    accountType:
- *                      type: string
- *                      description: The User's account preference
- *                      example: savings
- *                    accountNumber:
- *                      type: number
- *                      description: The User account number
- *                      example: 1234567890
- *                    accountBalance:
- *                      type: number
- *                      description: The User account balance
- *                      example: 1000.00
- *                    createdAt:
- *                      type: string
- *                      format: date-time
- *                      description: The Wallet creation date
- *                      example: 2026-05-04
- *                    updatedAt:
- *                      type: string
- *                      format: date-time
- *                      description: The Wallet update time
- *                      example: 2026-05-04
+ *     responses:
+ *       200:
+ *         description: retrieve a user wallet
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 data:
+ *                   type: object
+ *                   properties:
+ *                     userId:
+ *                       type: string
+ *                       description: The User's Id
+ *                       example: 787674563782983746578439
+ *                     accountType:
+ *                       type: string
+ *                       description: The User's account preference
+ *                       example: savings
+ *                     accountNumber:
+ *                       type: number
+ *                       description: The User account number
+ *                       example: 1234567890
+ *                     accountBalance:
+ *                       type: number
+ *                       description: The User account balance
+ *                       example: 1000.00
+ *                     createdAt:
+ *                       type: string
+ *                       format: date-time
+ *                       description: The Wallet creation date
+ *                       example: 2026-05-04
+ *                     updatedAt:
+ *                       type: string
+ *                       format: date-time
+ *                       description: The Wallet update time
+ *                       example: 2026-05-04
  */
 router.get('/getwallet', verifyLogin, getWallet)
 
@@ -452,45 +449,45 @@ router.get('/getwallet', verifyLogin, getWallet)
  *       - Wallet
  *     summary: User Wallets
  *     description: Get all wallets associated with the user
- *    responses:
- *      200:
- *        description: list of user wallets
- *        content:
- *          application/json:
- *            schema:
- *              type: object
- *              properties:
- *                data:
- *                  type: array
- *                  items:
- *                    type: object
- *                    properties:
- *                      userId:
- *                        type: string
- *                        description: The User's Id
- *                        example: 787674563782983746578439
- *                      accountType:
- *                        type: string
- *                        description: The User's account preference
- *                        example: savings
- *                      accountNumber:
- *                        type: number
- *                        description: The User account number
- *                        example: 1234567890
- *                      accountBalance:
- *                        type: number
- *                        description: The User account balance
- *                        example: 1000.00
- *                      createdAt:
- *                        type: string
- *                        format: date-time
- *                        description: The Wallet creation date
- *                        example: 2026-05-04
- *                      updatedAt:
- *                        type: string
- *                        format: date-time
- *                        description: The Wallet update time
- *                        example: 2026-05-04
+ *     responses:
+ *       200:
+ *         description: list of user wallets
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 data:
+ *                   type: array
+ *                   items:
+ *                     type: object
+ *                     properties:
+ *                       userId:
+ *                         type: string
+ *                         description: The User's Id
+ *                         example: 787674563782983746578439
+ *                       accountType:
+ *                         type: string
+ *                         description: The User's account preference
+ *                         example: savings
+ *                       accountNumber:
+ *                         type: number
+ *                         description: The User account number
+ *                         example: 1234567890
+ *                       accountBalance:
+ *                         type: number
+ *                         description: The User account balance
+ *                         example: 1000.00
+ *                       createdAt:
+ *                         type: string
+ *                         format: date-time
+ *                         description: The Wallet creation date
+ *                         example: 2026-05-04
+ *                       updatedAt:
+ *                         type: string
+ *                         format: date-time
+ *                         description: The Wallet update time
+ *                         example: 2026-05-04
  */
 router.get('/wallets', getWallets)
 

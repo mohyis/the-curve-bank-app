@@ -5,7 +5,6 @@ const otpGenerator = require('otp-generator')
 const jwt = require('jsonwebtoken')
 
 
-
 // const OTP = Math.floor(Math.random()* 1e4).toString().padEnd(4, `${Math.floor(Math.random()*10)}`)
 
 
@@ -59,9 +58,7 @@ exports.signUp = async(req,res,next)=>{
         const data = {
             fullName: signup.fullName,
             email: signup.email,
-            accountNumber: signup.accountNumber,
-            accountType: signup.accountType,
-            balance: signup.balance
+            password: signup.password
         }
 
         res.status(201).json({
