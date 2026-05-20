@@ -188,6 +188,8 @@ exports.getAllUser = async(req,res, next)=>{
     try {
         const allUsers = await userModel.find().select('-password')
 
+    
+
         res.status(200).json({
             message: 'users found',
             allUsers
@@ -214,7 +216,6 @@ exports.getUser = async(req,res, next)=>{
         const data = {
             fullName: user.fullName,
             balance: user.balance,
-
         }
 
         res.status(200).json({

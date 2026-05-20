@@ -40,26 +40,10 @@ const {rate, rateTransfer } = require('../middleware/rateLimit');
  *           type: string
  *           description: The User's email
  *           example: example@example.com
- *         accountType:
- *           type: string
- *           description: users account choice
- *           example: savings
- *         accountNumber:
- *           type: number
- *           description: The User acount number
- *           example: 8029837465
- *         balance:
- *           type: number
- *           description: account balance
- *           example: 8029837465
  *         password:
  *           type: string
  *           description: The User's password
  *           example: password123
- *         isVerified:
- *           type: boolean
- *           description: The User verification status
- *           example: true
  *         createdAt:
  *           type: string
  *           format: date-time
@@ -135,18 +119,6 @@ const {rate, rateTransfer } = require('../middleware/rateLimit');
  *                 type: string
  *                 description: The User's email
  *                 example: example@example.com
- *               accountType:
- *                 type: string
- *                 description: The User's account preference
- *                 example: current
- *               accountNumber:
- *                 type: number
- *                 description: The User account number
- *                 example: 8029837465
- *               balance:
- *                 type: number
- *                 description: The User account balance
- *                 example: 80295
  *               password:
  *                 type: string
  *                 description: The User's password
